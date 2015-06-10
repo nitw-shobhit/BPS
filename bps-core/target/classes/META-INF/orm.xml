@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+
+	<named-query name="validateLogin">
+		<query>Select a from BpsUserInfo a where a.userId = :paramUserId and a.userPass = :paramUserPass</query>
+	</named-query>
+	
+	<named-query name="findProcessesByOrganizationId">
+		<query>Select a from BpsOrgProc a where a.orpOrgId = :paramOrgId</query>
+	</named-query>
+	
+	<named-query name="deleteProcess">
+		<query>Delete from BpsProcess a where a.id = :id</query>
+	</named-query>
+	
+	<named-query name="deleteProcessVersions">
+		<query>Delete from BpsProcessVer a where a.provId = :provId</query>
+	</named-query>
+	
+	<named-query name="deleteOrganization">
+		<query>Delete from BpsOrganization a where a.id = :id</query>
+	</named-query>
+	
+	<named-query name="deleteOrganizationprocesses">
+		<query>Delete from BpsOrgProc a where a.orpOrgId = :orpOrgId</query>
+	</named-query>
+	
+</entity-mappings>
