@@ -4,18 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<style type="text/css">
-		.main {
-			background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat center center fixed;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-		}
-	</style>
 </head>
 <body>
-	<div class="main">
+	<div style="float: left;">
 		<img src="<%= request.getContextPath()%>/resources/images/logo.png" style="margin-left : 5px; margin-top : 5px; margin-bottom : 5px;"/>
 	</div>
 </body>

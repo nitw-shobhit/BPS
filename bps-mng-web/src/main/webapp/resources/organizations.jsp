@@ -2,13 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <jsp:include page="organization/addOrganization.jsp"/>
 <jsp:include page="organization/editOrganization.jsp"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/displaytag.css" type="text/css" />
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -283,9 +284,16 @@
 			<br>
 			<div id="orgDetBox">
 				<fieldset class="organizationData">
-					<legend>
-						<b><font size="3">ORGANIZATIONS DETAILS</font></b>
-					</legend>
+					<legend><b><font size="3">ORGANIZATIONS DETAILS</font></b></legend>
+						<br>
+						<display:table name="orgProcList" pagesize="5" export="false" sort="list" uid="procList">
+			                 <display:column property="procId" title="ID" sortable="true" headerClass="sortable" style="width:6%;" />
+			                 <display:column property="procName" title="NAME" sortable="true" headerClass="sortable" style="width:10%;" />
+			                 <display:column property="procAuthor" title="AUTHOR" sortable="true" headerClass="sortable" style="width:7%;" />
+			                 <display:column property="procNotn" title="NOTATION" sortable="true" headerClass="sortable" style="width:10%;" />
+			                 <display:column property="procDesc" title="DESCRIPTION" sortable="true" headerClass="sortable" style="width:34%;" />
+			                 <display:column property="procCurrVer" title="CURRENT VER" sortable="true" headerClass="sortable" style="width:15%;"/>
+			            </display:table>
 				</fieldset>
 			</div>
 		</div>

@@ -16,9 +16,9 @@ import com.bps.util.service.ServiceType;
 
 @Controller
 @RequestMapping("/mngOrg")
-@SessionAttributes({"organizationList", "orgProcList"})
+@SessionAttributes({"organizationList"})
 public class OrganizationController {
-	
+
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationData.do")
 	public ModelAndView getOrganizationData() {
 		ModelAndView targetView = new ModelAndView("organizations");

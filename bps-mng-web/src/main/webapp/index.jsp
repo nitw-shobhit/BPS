@@ -1,67 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html data-ng-app="bps-app">
 <head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/angular.min.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/angular-route.min.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/angular-ui-router.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/bpsAngular.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Business Process System</title>
+<title>Business Process Management</title>
 <link rel="icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/favicon.ico" />
 <style type="text/css">
-	.main {
-		background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat center center fixed;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-		height: 950px;
-		width: 1200px;
-	}
-	.loginBox {
-		background: url(<%= request.getContextPath()%>/resources/images/loginbox.jpg) no-repeat center center;
-		position: relative;
-		height: 450px;
-		width: 540px;
-	}
-	.logoBox {
-		position: relative;
-		float: left;
-		margin-left: 5px;
-		margin-top: 5px;
-	}
-	.loginInput {
-		height: 38px;
-		width: 367px;
-		margin-right: 1px;
-		margin-top: 16px;
-	}
-	.loginSubmit {
-		height: 45px;
-		width: 372px;
-		margin-right: 1px;
-		background-color: #1E61CC;
-		font-weight: bold;
-		font-size: 20px;
-		color: #FFF;
-	}
+.main {
+	background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 950px;
+	width: 1200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
 </head>
 <body>
-	<center>
-		<div class="main">
-		<div class="logoBox">
-			<img src="<%= request.getContextPath()%>/resources/images/logo.png" />
-		</div>
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<div class="loginBox">
-			<br><br><br><br><br><br><br>
-				<form:form action="/bps-mng-web/mngLogin/validateLogin.do" method="POST">
-					<input type = "text" class = "loginInput" name = "userId" value="Admin" /><br><br>
-					<input type = "password" class="loginInput" name = "userPass" style="margin-top: 17px;" value="Admin" /><br><br><br>
-					<input type = "submit" class = "loginSubmit" value="Login" />
-				</form:form>
+	<div class="main">
+		<div id = "header" style="height: 130px; width: 1200px;">
+			<div data-ui-view="logo" style="height: 130px; width: 870px; float: left;">
+			</div>
+			<div data-ui-view="userInfo" style="height: 130px; width: 320px; float: right;">	
 			</div>
 		</div>
-	</center>
+		<div data-ui-view="menu" style="height: 50px; width: 1200px; margin-top: 5px;">
+		</div>
+		<div data-ui-view="content" id = "content" style="height: 750px; width: 1200px; margin-top: 5px;">
+		</div>
+	</div>
 </body>
 </html>
