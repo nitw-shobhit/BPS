@@ -3,8 +3,8 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html data-ng-app>
+<!DOCTYPE html>
+<html>
 <head>
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/displaytag.css" type="text/css" />
 <script src="<%= request.getContextPath()%>/resources/js/bps-js.js"></script>
@@ -54,7 +54,7 @@
 <body>
 	<div class="main">
 		<div class="contentBox">
-
+		LOGS
 		</div>
 	</div>
 </body>

@@ -8,6 +8,7 @@
 <script src="<%= request.getContextPath()%>/resources/js/angular-route.min.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/angular-ui-router.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bpsAngular.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process Management</title>
 <link rel="icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/favicon.ico" />
@@ -27,16 +28,16 @@
 </style>
 </head>
 <body>
-	<div class="main">
+	<div class="main" style="">
 		<div id = "header" style="height: 130px; width: 1200px;">
 			<div data-ui-view="logo" style="height: 130px; width: 870px; float: left;">
 			</div>
-			<div data-ui-view="userInfo" style="height: 130px; width: 320px; float: right;">	
+			<div data-ui-view="userInfo" style="height: 130px; width: 320px; float: right;">
 			</div>
 		</div>
 		<div data-ui-view="menu" style="height: 50px; width: 1200px; margin-top: 5px;">
 		</div>
-		<div data-ui-view="content" id = "content" style="height: 750px; width: 1200px; margin-top: 5px;">
+		<div data-ui-view="content" style="height: 750px; width: 1200px; margin-top: 5px;">
 		</div>
 	</div>
 </body>

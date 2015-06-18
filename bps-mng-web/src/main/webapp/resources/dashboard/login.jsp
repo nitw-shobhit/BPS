@@ -32,10 +32,22 @@
 	font-size: 20px;
 	color: #FFF;
 }
+.main {
+	background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 950px;
+	width: 1200px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
 </style>
 </head>
 <body>
-	<br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br>
 	<div class="loginBox">
 	<br><br><br><br><br><br><br>
 		<input type= "text" class= "loginInput" data-ng-model="userId" value="Admin" /><br><br>

@@ -31,7 +31,7 @@
 						<img class="profilePic" src="<%= request.getContextPath()%>/resources/images/default_p_img.png" />
 					</div>
 					<div data-ng-if ="profileData.userImage">
-					No Image
+					Image Found
 					</div>
 				</td>
 				<td>

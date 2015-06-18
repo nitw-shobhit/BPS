@@ -2,13 +2,143 @@ var module = angular.module("bps-app", ['ui.router']);
 
 // Routing
 module.config(function ($stateProvider, $urlRouterProvider) {
-	$stateProvider.state('base', {url: "",
-								 views: {"logo": {templateUrl: "resources/dashboard/logo.jsp", controller: "loginController"}, 
-									 	 "content": {templateUrl: "resources/dashboard/login.jsp", controller: "loginController"}}})
-				  .state('dashboard', {url : "/dashboard", 
-								 views: {"content": {templateUrl: "resources/home.jsp", controller: "loginController"},
-									 	 "menu": {templateUrl: "resources/dashboard/menu.jsp", controller: "menuController"},
-									 	 "userInfo": {templateUrl: "resources/dashboard/userInfo.jsp", controller: "userInfoController"}}})
+	$stateProvider.state('app',
+							{
+								url: "/",
+								views: {
+									'logo' : {
+										templateUrl : 'resources/dashboard/logo.jsp'
+									},
+									'content' : {
+										templateUrl : 'resources/dashboard/login.jsp',
+										controller : 'loginController'
+									}
+								}
+							}
+				  		)
+				  .state('app.dboard',
+							{
+								url: "",
+								views: {
+									'userInfo@' : {
+										templateUrl : 'resources/dashboard/userInfo.jsp',
+										controller : 'userInfoController'
+									},
+									'menu@' : {
+										templateUrl : 'resources/dashboard/menu.jsp',
+										controller : 'menuController'
+									},
+									'content@' : {
+										templateUrl : 'resources/home.jsp'
+									}
+								}
+							}
+					  	)
+				  .state('app.dboard.home',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/home.jsp'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.org',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/organizations.jsp',
+										controller : 'organizationController'
+									}
+								}
+							}
+					  	)
+				  .state('app.dboard.org.orgs',
+							{
+								url: "",
+								views: {
+									 'orgs' : {
+											templateUrl : 'resources/organization/organizationList.jsp',
+											controller : 'organizationDataController'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.org.orgs.orgdata',
+							{
+								url: "",
+								views: {
+									 'orgData' : {
+											templateUrl : 'resources/organization/organizationData.jsp',
+											controller : 'organizationDataController'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.proc',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/processes.jsp'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.proc.procs',
+							{
+								url: "",
+								views: {
+									 'procs' : {
+											templateUrl : 'resources/process/processList.jsp',
+											controller : 'processDataController'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.proc.procs.procdata',
+							{
+								url: "",
+								views: {
+									 'procData' : {
+											templateUrl : 'resources/process/processVersions.jsp',
+											controller : 'processDataController'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.log',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/logs.jsp'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.sts',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/settings.jsp'
+									}
+								}
+							}
+					  	)
+				 .state('app.dboard.help',
+							{
+								url: "",
+								views: {
+									'content@' : {
+										templateUrl : 'resources/help.jsp'
+									}
+								}
+							}
+					  	)				  	
 	$urlRouterProvider.otherwise("/");
 });
 
@@ -28,7 +158,7 @@ module.factory('transferService', function() {
 });
 
 // Controllers
-module.controller("loginController", function ($scope, $state, $timeout, transferService) {
+module.controller("loginController", function ($scope, $state, transferService) {
 	$scope.login = function() {
         $.ajax({
             url: '/bps-mng-web/mngLogin/validateLogin.do?userId=' + $scope.userId + '&password=' + $scope.userPass,
@@ -37,8 +167,7 @@ module.controller("loginController", function ($scope, $state, $timeout, transfe
             async: false,
             success: function(data) {
             	transferService.set(data);
-            	var params = angular.extend({}, $state.params, { trigger: $state.params.trigger ? undefined : 'x' });
-                $state.transitionTo('dashboard', params, { location: false, reload: false })
+                $state.transitionTo('app.dboard');
             }
         }).fail(function() {
         });
@@ -49,7 +178,58 @@ module.controller("userInfoController", function ($scope, transferService) {
 	$scope.profileData = transferService.get();
 });
 
-module.controller("menuController", function ($scope, $state, $timeout, transferService) {
-	$scope.login = function() {
+module.controller("menuController", function ($scope, $state, transferService) {
+	$scope.home = function() {
+        $state.transitionTo('app.dboard.home');
+	}
+	$scope.orgs = function() {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/getOrganizationData.do',
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	$state.transitionTo('app.dboard.org.orgs');
+	            }
+	        }).fail(function() {
+	    });
+	}
+	$scope.procs = function() {
+        $state.transitionTo('app.dboard.proc');
+	}
+	$scope.logs = function() {
+        $state.transitionTo('app.dboard.log');
+	}
+	$scope.stngs = function() {
+        $state.transitionTo('app.dboard.sts');
+	}
+	$scope.help = function() {
+        $state.transitionTo('app.dboard.help');
+	}
+	$scope.lgot = function() {
+        $state.transitionTo('app');
+	}
+});
+
+module.controller("organizationController", function ($scope, $state, transferService) {
+	$scope.organizationList = transferService.get();
+	$state.transitionTo('app.dboard.org.orgs');
+});
+
+module.controller("organizationDataController", function ($scope, $state) {
+	$scope.getOrgData = function(org) {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/getOrganizationProcesses.do?orgId='+org.id,
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	$scope.selectedOrg = org;
+	            	$scope.orgProcs = data;
+	            	$state.transitionTo('app.dboard.org.orgs.orgdata');
+	            }
+	        }).fail(function() {
+	    });
 	}
 });
