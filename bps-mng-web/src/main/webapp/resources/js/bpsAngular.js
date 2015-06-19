@@ -1,4 +1,4 @@
-var module = angular.module("bps-app", ['ui.router']);
+var module = angular.module("bps-app", ['ui.router', 'ngDialog']);
 
 // Routing
 module.config(function ($stateProvider, $urlRouterProvider) {
@@ -82,7 +82,8 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 								url: "",
 								views: {
 									'content@' : {
-										templateUrl : 'resources/processes.jsp'
+										templateUrl : 'resources/processes.jsp',
+										controller : 'processController'
 									}
 								}
 							}
@@ -196,7 +197,17 @@ module.controller("menuController", function ($scope, $state, transferService) {
 	    });
 	}
 	$scope.procs = function() {
-        $state.transitionTo('app.dboard.proc');
+		 $.ajax({
+	            url: '/bps-mng-web/mngProcess/getProcessData.do',
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	$state.transitionTo('app.dboard.proc.procs');
+	            }
+	        }).fail(function() {
+	    });
 	}
 	$scope.logs = function() {
         $state.transitionTo('app.dboard.log');
@@ -212,12 +223,42 @@ module.controller("menuController", function ($scope, $state, transferService) {
 	}
 });
 
+module.controller("processController", function ($scope, $state, transferService) {
+	$scope.processList = transferService.get();
+	$state.transitionTo('app.dboard.proc.procs');
+});
+
+module.controller("processDataController", function ($scope, $state) {
+	$scope.getProcVersions = function(procId) {
+		 $.ajax({
+	            url: '/bps-mng-web/mngProcess/getProcessVersions.do?procId='+procId,
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	$scope.procVersions = data;
+	            	$state.transitionTo('app.dboard.proc.procs.procdata');
+	            }
+	        }).fail(function() {
+	    });
+	}
+});
+
 module.controller("organizationController", function ($scope, $state, transferService) {
 	$scope.organizationList = transferService.get();
 	$state.transitionTo('app.dboard.org.orgs');
 });
 
-module.controller("organizationDataController", function ($scope, $state) {
+module.controller("organizationDataController", function ($scope, $state, ngDialog) {
+	$scope.selectOrganization = function () {
+        ngDialog.open({
+            template: 'selectOrgPopup',
+            className: 'ngdialog-theme-default selectOrganization',
+            preCloseCallback: function(value) {
+            	return true;
+            }
+        });
+    };
 	$scope.getOrgData = function(org) {
 		 $.ajax({
 	            url: '/bps-mng-web/mngOrg/getOrganizationProcesses.do?orgId='+org.id,
@@ -228,6 +269,19 @@ module.controller("organizationDataController", function ($scope, $state) {
 	            	$scope.selectedOrg = org;
 	            	$scope.orgProcs = data;
 	            	$state.transitionTo('app.dboard.org.orgs.orgdata');
+	            }
+	        }).fail(function() {
+	    });
+	}
+	$scope.removeOrganization = function(orgId) {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/deleteOrganization.do?orgId='+orgId,
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	$state.transitionTo('app.dboard.org.orgs');
 	            }
 	        }).fail(function() {
 	    });

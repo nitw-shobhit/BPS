@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="<%= request.getContextPath()%>/resources/js/bps-js.js"></script>
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<%-- <script src="<%= request.getContextPath()%>/resources/js/bps-js.js"></script> --%>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process System</title>
 <style type="text/css">
@@ -33,10 +33,10 @@
 }
 </style>
 <script type="text/javascript">
-		function openPopupWindow(id) {
-			$(id).dialog({ modal: true, height: 400, width: 450, closeOnEscape: true}).prev(".ui-dialog-titlebar").css("background","white");
-		}
-	</script>
+	function openPopupWindow(id) {
+		$(id).dialog({ modal: true, height: 400, width: 450, closeOnEscape: true}).prev(".ui-dialog-titlebar").css("background","white");
+	}
+</script>
 </head>
 <body>
 	<div class="contentBox">

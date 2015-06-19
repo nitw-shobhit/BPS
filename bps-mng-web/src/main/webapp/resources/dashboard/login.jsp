@@ -47,7 +47,7 @@
 </style>
 </head>
 <body>
-	<br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br>
 	<div class="loginBox">
 	<br><br><br><br><br><br><br>
 		<input type= "text" class= "loginInput" data-ng-model="userId" value="Admin" /><br><br>

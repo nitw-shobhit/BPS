@@ -10,6 +10,7 @@ import com.bps.core.db.DBFacade;
 import com.bps.core.entities.BpsProcessVer;
 import com.bps.dao.service.factory.DaoServiceFactory;
 import com.bps.model.service.ProcessVersionService;
+import com.bps.util.db.Param;
 import com.bps.util.service.ServiceType;
 
 public class ProcessVersionServiceImpl implements ProcessVersionService {
@@ -31,5 +32,19 @@ public class ProcessVersionServiceImpl implements ProcessVersionService {
 			procVerBeanMap.put(procVerBean.getProvId(), tempList);
 		}
 		return procVerBeanMap;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProcessVerBean> getProcessVersionsByProcessId(Long procId) {
+		DBFacade<BpsProcessVer, Long> dbService = DaoServiceFactory.generateService(ServiceType.ProcessVersion);
+		List<ProcessVerBean> procVerBeanList = new ArrayList<ProcessVerBean>();
+		Param [] params = new Param[1];
+		params[0] = new Param("paramProvId", procId);
+		List<BpsProcessVer> procVerEntList = dbService.findByParams("findProcessVersionsByProcessId", params);
+		for(BpsProcessVer procVer : procVerEntList) {
+			procVerBeanList.add(procVer.convertEntityToBean());
+		}
+		return procVerBeanList;
 	}
 }

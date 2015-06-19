@@ -32,12 +32,10 @@ public class OrganizationController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/addOrganization.do")
-	public ModelAndView addOrganization(@ModelAttribute("bps-mng-web")OrganizationBean orgBean) {
+	public @ResponseBody String addOrganization(@ModelAttribute("orgBean")OrganizationBean orgBean) {
 		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
 		orgService.addOrganization(orgBean);
-//		ModelAndView targetView = getOrganizationData();
-//		return targetView;
-		return null;
+		return getOrganizationData();
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/editOrganization.do")
@@ -50,11 +48,9 @@ public class OrganizationController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/deleteOrganization.do")
-	public ModelAndView deleteOrganization(@RequestParam("idOrganization") Long idOrganization) {
+	public @ResponseBody String deleteOrganization(@RequestParam("orgId") Long orgId) {
 		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
-		orgService.deleteOrganization(idOrganization);
-//		ModelAndView targetView = getOrganizationData();
-//		return targetView;
-		return null;
+		orgService.deleteOrganization(orgId);
+		return getOrganizationData();
 	}
 }

@@ -7,5 +7,6 @@ import com.bps.core.beans.ProcessVerBean;
 
 public interface ProcessVersionService {
 
-	public Map<Long, List<ProcessVerBean>> getProcessVersions();
+	Map<Long, List<ProcessVerBean>> getProcessVersions();
+	List<ProcessVerBean> getProcessVersionsByProcessId(Long procId);
 }

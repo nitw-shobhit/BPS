@@ -11,7 +11,7 @@
 	width: 99%;
 }
 .tabBox {
-	font-size: 17px;
+	font-size: 15px;
 	color: rgb(62, 62, 62);
 	margin: 18px;
 }

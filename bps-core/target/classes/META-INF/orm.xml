@@ -9,6 +9,10 @@
 		<query>Select a from BpsOrgProc a where a.orpOrgId = :paramOrgId</query>
 	</named-query>
 	
+	<named-query name="findProcessVersionsByProcessId">
+		<query>Select a from BpsProcessVer a where a.provId = :paramProvId</query>
+	</named-query>
+	
 	<named-query name="deleteProcess">
 		<query>Delete from BpsProcess a where a.id = :id</query>
 	</named-query>

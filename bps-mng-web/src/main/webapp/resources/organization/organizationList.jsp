@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<jsp:include page="organizationHelper.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process System</title>
 <script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog.css">
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog-theme-default.css">
 <style type="text/css">
 .contentBox {
 	margin-left: 7px;
@@ -54,6 +57,18 @@
 	margin-top: 5px;
 	margin-right: 5px;
 }
+.addOrg {
+	height: 130px;
+	width: 200px;
+	box-shadow: 7px 7px 7px #888;
+	float: left;
+	margin-right: 10px;
+}
+.getStartedLink {
+	text-decoration: underline;
+	font-size: 25px;
+	background-color: #FFF;
+}
 </style>
 </head>
 <body>
@@ -81,7 +96,7 @@
 										<div class="orgSideMenu"
 											style="background-color: #F29595; text-align: center;">
 											<a
-												href="/bps-mng-web/mngOrg/deleteOrganization.do?idOrganization={{org.id}}"
+												data-ng-click="removeOrganization(org.id)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/remove.ico"
 												height="20" width="20" title="Delete"/></a><br><br>
@@ -181,7 +196,7 @@
 						<td>
 							<div class="addOrg"
 								style="background-color: #E0E6F8; text-align: center;">
-								<a href="#"
+								<a data-ng-click="selectOrganization()"
 									style="cursor: pointer;"> <br> <font size="4">Add
 										New Organization..</font>
 								</a>

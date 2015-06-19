@@ -8,6 +8,7 @@
 <script src="<%= request.getContextPath()%>/resources/js/angular-route.min.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/angular-ui-router.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bpsAngular.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/ngDialog.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process Management</title>
