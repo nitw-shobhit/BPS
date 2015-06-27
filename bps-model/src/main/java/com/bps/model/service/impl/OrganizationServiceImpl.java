@@ -58,9 +58,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 	@Override
 	public void editOrganization(OrganizationBean orgBean) {
 		DBFacade<BpsOrganization, Long> dbService = DaoServiceFactory.generateService(ServiceType.Organization);
-		BpsOrganization orgSource = dbService.findByPk(orgBean.getId());
-		orgBean.setId(orgSource.getId());
-		orgBean.setOrgCrDt(new Timestamp(new Date().getTime()));
 		dbService.merge(orgBean.convertBeanToEntity());
 	}
 }
