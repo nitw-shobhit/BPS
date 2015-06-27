@@ -9,12 +9,12 @@
 </head>
 	<frameset cols="20%, *, 20%">
 		<frame name="blankFrame" frameborder="0" scrolling="no" noresize="noresize" />
-		<frameset rows="15%, 3.3%, *">
+		<frameset rows="14.3%, 6.1%, *">
 			<frameset cols="70%, *">
-				<frame name="logoFrame" src="<%= request.getContextPath()%>/resources/logo.jsp" frameborder="0" scrolling="no" noresize="noresize" />
-				<frame name="userInfoFrame" src="<%= request.getContextPath()%>/resources/userInfo.jsp" frameborder="0" scrolling="no" noresize="noresize" />
+				<frame name="logoFrame" src="<%= request.getContextPath()%>/resources/dashboard/logo.jsp" frameborder="0" scrolling="no" noresize="noresize" />
+				<frame name="userInfoFrame" src="<%= request.getContextPath()%>/resources/dashboard/userInfo.jsp" frameborder="0" scrolling="no" noresize="noresize" />
 			</frameset>
-			<frame name="menuFrame" src="<%= request.getContextPath()%>/resources/menu.jsp" frameborder="0" scrolling="no" noresize="noresize" />
+			<frame name="menuFrame" src="<%= request.getContextPath()%>/resources/dashboard/menu.jsp" frameborder="0" scrolling="no" noresize="noresize" />
 			<frame name="contentFrame" src="<%= request.getContextPath()%>/resources/home.jsp" frameborder="0" scrolling="no" noresize="noresize" />
 		</frameset>
 		<frame name="blankFrame" frameborder="0" scrolling="no" noresize="noresize" />
