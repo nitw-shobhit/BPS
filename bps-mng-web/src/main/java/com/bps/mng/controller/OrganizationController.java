@@ -1,56 +1,75 @@
 package com.bps.mng.controller;
 
+import java.io.IOException;
+
+import javax.annotation.Resource;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bps.core.beans.OrganizationBean;
 import com.bps.model.service.OrganizationProcessService;
 import com.bps.model.service.OrganizationService;
-import com.bps.model.service.factory.ServiceFactory;
-import com.bps.util.service.ServiceType;
-import com.google.gson.Gson;
+import com.bps.util.spring.JsonUtils;
 
 @Controller
 @RequestMapping("/mngOrg")
 public class OrganizationController {
 
+	@Resource
+	private OrganizationService orgService;
+	
+	@Resource
+	private OrganizationProcessService orgProcService;
+
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationData.do")
 	public @ResponseBody String getOrganizationData() {
-		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
-		return new Gson().toJson(orgService.getOrganizations());
+		return JsonUtils.toJson(orgService.getOrganizations());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationProcesses.do")
 	public @ResponseBody String getOrganizationProcesses(@RequestParam("orgId") Long orgId) {
-		OrganizationProcessService orgProcService = (OrganizationProcessService)ServiceFactory.generateService(ServiceType.OrganizationProcess);
-		return new Gson().toJson(orgProcService.getOrganizationProcesses(orgId));
+		return JsonUtils.toJson(orgProcService.getOrganizationProcesses(orgId));
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="/addOrganization.do")
-	public @ResponseBody String addOrganization(@ModelAttribute("orgBean")OrganizationBean orgBean) {
-		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
+	@RequestMapping(method = RequestMethod.GET, value="/addOrganization.do")
+	public @ResponseBody String addOrganization(@RequestParam("org")String orgJson) throws JsonParseException, JsonMappingException, IOException {
+		OrganizationBean orgBean = (OrganizationBean) JsonUtils.toPojo(orgJson, OrganizationBean.class);
 		orgService.addOrganization(orgBean);
 		return getOrganizationData();
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value="/editOrganization.do")
-	public ModelAndView editOrganization(@ModelAttribute("bps-mng-web")OrganizationBean orgBean) {
-		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
-		orgService.addOrganization(orgBean);
-//		ModelAndView targetView = getOrganizationData();
-//		return targetView;
-		return null;
+	@RequestMapping(method = RequestMethod.GET, value="/editOrganization.do")
+	public @ResponseBody String editOrganization(@RequestParam("org")String orgJson) throws JsonParseException, JsonMappingException, IOException {
+		OrganizationBean orgBean = (OrganizationBean) JsonUtils.toPojo(orgJson, OrganizationBean.class);
+		orgService.editOrganization(orgBean);
+		return getOrganizationData();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/deleteOrganization.do")
 	public @ResponseBody String deleteOrganization(@RequestParam("orgId") Long orgId) {
-		OrganizationService orgService = (OrganizationService)ServiceFactory.generateService(ServiceType.Organization);
 		orgService.deleteOrganization(orgId);
 		return getOrganizationData();
+	}
+
+	public OrganizationService getOrgService() {
+		return orgService;
+	}
+
+	public void setOrgService(OrganizationService orgService) {
+		this.orgService = orgService;
+	}
+
+	public OrganizationProcessService getOrgProcService() {
+		return orgProcService;
+	}
+
+	public void setOrgProcService(OrganizationProcessService orgProcService) {
+		this.orgProcService = orgProcService;
 	}
 }
