@@ -1,7 +1,15 @@
-var module = angular.module("bps-app", ['ui.router', 'ngDialog']);
+var module = angular.module('bps-app', ['ui.router', 'ngDialog']);
 
 // Routing
-module.config(function ($stateProvider, $urlRouterProvider) {
+module.config(function ($stateProvider, $urlRouterProvider, $provide) {
+//	
+//	$provide.decorator('$state', function($delegate) {
+//	    $delegate.reinit = function() {
+//	      this.transitionTo(this.current, this.$current.params, { reload: true, inherit: true, notify: true });
+//	    };
+//	    return $delegate;
+//	  });
+//	
 	$stateProvider.state('app',
 							{
 								url: "/",
@@ -143,6 +151,22 @@ module.config(function ($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/");
 });
 
+module.directive('loading', function () {
+      return {
+        restrict: 'E',
+        replace:true,
+        template: '<div class="loading"><img src="http://www.jsclasses.org/browse/view/image/file/3815/name/loading.gif" width="20" height="20" /></div>',
+        link: function (scope, element, attr) {
+              scope.$watch('loading', function (val) {
+                  if (val)
+                      $(element).show();
+                  else
+                      $(element).hide();
+              });
+        }
+      }
+});
+
 module.factory('transferService', function() {
 	 var savedData = {}
 	 function set(data) {
@@ -161,6 +185,7 @@ module.factory('transferService', function() {
 // Controllers
 module.controller("loginController", function ($scope, $state, transferService) {
 	$scope.login = function() {
+		$scope.loading = true;
         $.ajax({
             url: '/bps-mng-web/mngLogin/validateLogin.do?userId=' + $scope.userId + '&password=' + $scope.userPass,
             type: 'POST',
@@ -169,8 +194,10 @@ module.controller("loginController", function ($scope, $state, transferService) 
             success: function(data) {
             	transferService.set(data);
                 $state.transitionTo('app.dboard');
+                $scope.loading = false;
             }
         }).fail(function() {
+        	$scope.loading = false;
         });
 	}
 });
@@ -249,15 +276,16 @@ module.controller("organizationController", function ($scope, $state, transferSe
 	$state.transitionTo('app.dboard.org.orgs');
 });
 
-module.controller("organizationDataController", function ($scope, $state, ngDialog) {
+module.controller("organizationDataController", function ($rootScope, $scope, $state, ngDialog, transferService) {
 	$scope.selectOrganization = function () {
-        ngDialog.open({
-            template: 'selectOrgPopup',
-            className: 'ngdialog-theme-default selectOrganization',
-            preCloseCallback: function(value) {
-            	return true;
-            }
-        });
+		ngDialog.open({
+			template: 'selectOrgPopup',
+			data: {'styleCl' : 'background-color: #EFB3B3; text-align: center;'},
+			className: 'ngdialog-theme-default selectOrganization',
+			preCloseCallback: function(value) {
+				return true;
+			}
+		});
     };
 	$scope.getOrgData = function(org) {
 		 $.ajax({
@@ -273,6 +301,55 @@ module.controller("organizationDataController", function ($scope, $state, ngDial
 	        }).fail(function() {
 	    });
 	}
+	$scope.addOrganization = function() {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/addOrganization.do?org='+JSON.stringify($scope.ngDialogData),
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	ngDialog.close();
+	            	$state.reload();
+	            }
+	        }).fail(function() {
+	    });
+	}
+	$scope.openEditOrganization = function(org) {
+		if(org.orgType == 'S') {
+			org.styleClass = 'schColorScheme';
+			org.message = 'School';
+		} else if(org.orgType == 'U') {
+			org.styleClass = 'uniColorScheme';
+			org.message = 'University';
+		} else if(org.orgType == 'C') {
+			org.styleClass = 'comColorScheme';
+			org.message = 'Company';
+		}
+		ngDialog.open({
+				template: 'editOrgPopup',
+				data: org,
+				className: 'ngdialog-theme-default addOrganization',
+				controller: 'organizationDataController',
+				preCloseCallback: function(value) {
+					return true;
+				}
+		});
+	}
+	$scope.editOrganization = function() {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/editOrganization.do?org='+JSON.stringify($scope.ngDialogData),
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	ngDialog.close();
+	            	$state.reload();
+	            }
+	        }).fail(function() {
+	    });
+	}
 	$scope.removeOrganization = function(orgId) {
 		 $.ajax({
 	            url: '/bps-mng-web/mngOrg/deleteOrganization.do?orgId='+orgId,
@@ -281,7 +358,54 @@ module.controller("organizationDataController", function ($scope, $state, ngDial
 	            async: false,
 	            success: function(data) {
 	            	transferService.set(data);
-	            	$state.transitionTo('app.dboard.org.orgs');
+	            	$state.reload();
+	            }
+	        }).fail(function() {
+	    });
+	}
+	$scope.openAttachProcess = function(org) {
+		var inputData={};
+		inputData.id = org.id;
+		if(org.orgType == 'S') {
+			inputData.styleClass = 'schColorScheme';
+			inputData.message = 'School';
+		} else if(org.orgType == 'U') {
+			inputData.styleClass = 'uniColorScheme';
+			inputData.message = 'University';
+		} else if(org.orgType == 'C') {
+			inputData.styleClass = 'comColorScheme';
+			inputData.message = 'Company';
+		}
+		 $.ajax({
+	            url: '/bps-mng-web/mngProcess/getProcessData.do',
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	inputData.data = data;
+	        		ngDialog.open({
+		    				template: 'attachProcPopup',
+		    				data: inputData,
+		    				className: 'ngdialog-theme-default attachProcToOrganization',
+		    				controller: 'organizationDataController',
+		    				preCloseCallback: function(value) {
+		    					return true;
+		    				}
+		    		});
+	            }
+	        }).fail(function() {
+	    });
+	}
+	$scope.attachProcessesToOrganization = function() {
+		 $.ajax({
+	            url: '/bps-mng-web/mngOrg/editOrganization.do?org='+JSON.stringify($scope.ngDialogData),
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	transferService.set(data);
+	            	ngDialog.close();
+	            	$state.reload();
 	            }
 	        }).fail(function() {
 	    });

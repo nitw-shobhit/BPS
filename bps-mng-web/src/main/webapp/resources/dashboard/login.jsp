@@ -11,26 +11,25 @@
 <title>Business Process System</title>
 <style type="text/css">
 .loginBox {
-	background: url(<%= request.getContextPath()%>/resources/images/loginbox.jpg) no-repeat center center;
-	height: 450px;
-	width: 540px;
+	background: url(<%= request.getContextPath()%>/resources/images/loginbox.jpg);
+	height: 440px;
+	width: 600px;
 	margin-right: auto;
 	margin-left: auto;
 }
 .loginInput {
-	height: 38px;
-	width: 367px;
+	height: 45px;
+	width: 375px;
 	margin-right: 1px;
 	margin-top: 16px;
 }
 .loginSubmit {
-	height: 45px;
-	width: 372px;
+	height: 50px;
+	width: 375px;
 	margin-right: 1px;
-	background-color: #1E61CC;
+	margin-top: 30px;
 	font-weight: bold;
 	font-size: 20px;
-	color: #FFF;
 }
 .main {
 	background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat center center fixed;
@@ -47,12 +46,11 @@
 </style>
 </head>
 <body>
-	<br><br><br><br><br><br><br>
+	<br><br><br><br>
 	<div class="loginBox">
-	<br><br><br><br><br><br><br>
-		<input type= "text" class= "loginInput" data-ng-model="userId" value="Admin" /><br><br>
-		<input type= "password" class="loginInput" data-ng-model="userPass" style="margin-top: 17px;" value="Admin" /><br><br><br>
-		<button class= "loginSubmit" data-ng-click="login()">Login</button>
+		<input type= "text" class= "loginInput" data-ng-model="userId" value="Admin" style="margin-top: 138px;" />
+		<input type= "password" class="loginInput" data-ng-model="userPass" style="margin-top: 33px;" value="Admin" />
+		<button class= "btn btn-primary loginSubmit" data-ng-click="login()">Login</button>
 	</div>
 </body>
 </html>

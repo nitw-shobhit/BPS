@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <jsp:include page="organizationHelper.jsp" />
+<jsp:include page="../reusable/confirmBox.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process System</title>
 <script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog.css">
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog-theme-default.css">
 <style type="text/css">
 .contentBox {
 	margin-left: 7px;
@@ -18,16 +17,8 @@
 }
 
 .organization {
-	height: 190px;
-	width: 99%;
-}
-
-.addOrg {
-	height: 130px;
-	width: 200px;
-	box-shadow: 7px 7px 7px #888;
-	float: left;
-	margin-right: 10px;
+	height: 250px;
+	width: 100%%;
 }
 
 .orgIntro {
@@ -43,6 +34,13 @@
   	filter: alpha(opacity=30);
   	cursor: pointer;
 }
+.addOrg {
+	height: 130px;
+	width: 200px;
+	box-shadow: 7px 7px 7px #888;
+	float: left;
+	margin-right: 10px;
+}
 .orgSideMenu:hover {
 	height: 130px;
 	width: 30px;
@@ -57,18 +55,6 @@
 	margin-top: 5px;
 	margin-right: 5px;
 }
-.addOrg {
-	height: 130px;
-	width: 200px;
-	box-shadow: 7px 7px 7px #888;
-	float: left;
-	margin-right: 10px;
-}
-.getStartedLink {
-	text-decoration: underline;
-	font-size: 25px;
-	background-color: #FFF;
-}
 </style>
 </head>
 <body>
@@ -77,7 +63,7 @@
 			<legend>
 				<b><font size="3">MY ORGANIZATIONS</font></b>
 			</legend>
-			<div style="overflow: auto; width: 1080px;">
+			<div style="overflow: auto; width: 1080px; height: 190px;">
 				<div data-ng-repeat="org in organizationList">
 					<div data-ng-if ="org.orgType == 'S'" style="float: left;">
 						<table>
@@ -101,12 +87,12 @@
 												src="<%=request.getContextPath()%>/resources/images/remove.ico"
 												height="20" width="20" title="Delete"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openAttachProcess(org)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_attach.ico"
 												height="20" width="20" title="Attach Process"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openEditOrganization(org)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_edit.ico"
 												height="20" width="20" title="Edit"/></a>
@@ -133,17 +119,17 @@
 										<div class="orgSideMenu"
 											style="background-color: #9BE781; text-align: center;">
 											<a
-												href="/bps-mng-web/mngOrg/deleteOrganization.do?idOrganization={{org.id}}"
+												data-ng-click="removeOrganization(org.id)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/remove.ico"
 												height="20" width="20" title="Delete"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openAttachProcess(org)"											
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_attach.ico"
 												height="20" width="20" title="Attach Process"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openEditOrganization(org)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_edit.ico"
 												height="20" width="20" title="Edit"/></a>
@@ -170,17 +156,17 @@
 										<div class="orgSideMenu"
 											style="background-color: #E5E67E; text-align: center;">
 											<a
-												href="/bps-mng-web/mngOrg/deleteOrganization.do?idOrganization={{org.id}}"
+												data-ng-click="removeOrganization(org.id)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/remove.ico"
 												height="20" width="20" title="Delete"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openAttachProcess(org)"										
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_attach.ico"
 												height="20" width="20" title="Attach Process"/></a><br><br>
 											<a
-												href="#"
+												data-ng-click="openEditOrganization(org)"
 												class="sideMenuLink"><img
 												src="<%=request.getContextPath()%>/resources/images/om_edit.ico"
 												height="20" width="20" title="Edit"/></a>

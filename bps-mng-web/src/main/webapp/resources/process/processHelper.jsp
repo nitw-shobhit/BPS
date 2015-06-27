@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,8 +11,6 @@
 		style="background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat;">
 		<br>
 		<br>
-		<form:form action="/bps-mng-web/mngProcess/addProcess.do"
-			method="POST">
 			<div style="background-color: #FFF;">
 				<table>
 					<tr>
@@ -42,7 +40,6 @@
 				</table>
 			</div>
 			<input type="submit" value="Add Process" />
-		</form:form>
 	</div>
 	<div id="settingsWindow" class="procPopUp" title="Manage Process"
 		style="display: none;background: url(<%= request.getContextPath()%>/resources/images/background.jpg) no-repeat;">

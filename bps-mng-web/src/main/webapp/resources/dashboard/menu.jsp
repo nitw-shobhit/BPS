@@ -48,10 +48,6 @@
 				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="stngs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_setting.ico" title="SETTINGS" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="lgot()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_logout.ico" title="LOGOUT" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 				<td class="menuBg" style="border-right: 1px solid;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="help()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_help.ico" title="HELP" height="26" width="26" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-<%-- 				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/bps-mng-web/mngProcess/getProcessData.do" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_log.ico" title="LOG" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td> --%>
-<%-- 				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath()%>/resources/settings.jsp" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_setting.ico" title="SETTINGS" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td> --%>
-<%-- 				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath()%>/index.jsp" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_logout.ico" title="LOGOUT" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td> --%>
-<%-- 				<td class="menuBg" style="border-right: 1px solid;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<%= request.getContextPath()%>/resources/help.jsp" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_help.ico" title="HELP" height="26" width="26" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> --%>
 			</tr>
 		</table>
 	</div>

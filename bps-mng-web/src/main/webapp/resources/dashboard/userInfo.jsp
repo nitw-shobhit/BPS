@@ -35,9 +35,11 @@
 					</div>
 				</td>
 				<td>
-					<b><font size="4" >{{profileData.userName}}</font></b><br><br>
-					<font size="3" >{{profileData.userId}}</font><br>
-					<font size="3" >{{profileData.userGroupId}}</font>
+					<div style="margin-left: 20px;">
+						<b><font size="4" >{{profileData.userName}}</font></b><br><br>
+						<font size="3" >{{profileData.userId}}</font><br>
+						<font size="3" >{{profileData.userGroupId}}</font>
+					</div>
 				</td>
 			</tr>
 		</table>

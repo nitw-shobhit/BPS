@@ -3,7 +3,11 @@
 <!DOCTYPE html>
 <html data-ng-app="bps-app">
 <head>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/bootstrap.css">
+<script src="<%= request.getContextPath()%>/resources/js/bootstrap.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog.css">
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/ngDialog-theme-default.css">
 <script src="<%= request.getContextPath()%>/resources/js/angular.min.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/angular-route.min.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/angular-ui-router.js"></script>
@@ -29,6 +33,7 @@
 </style>
 </head>
 <body>
+	<loading></loading>
 	<div class="main" style="">
 		<div id = "header" style="height: 130px; width: 1200px;">
 			<div data-ui-view="logo" style="height: 130px; width: 870px; float: left;">

@@ -195,11 +195,16 @@
 }
 
 .ngdialog.ngdialog-theme-default.selectOrganization .ngdialog-content {
-	width: 700px;
+	width: 670px;
 	height: 200px;
 }
 
 .ngdialog.ngdialog-theme-default.addOrganization .ngdialog-content {
 	width: 450px;
-	height: 450px;
+	height: 390px;
+}
+
+.ngdialog.ngdialog-theme-default.attachProcToOrganization .ngdialog-content {
+	width: 700px;
+	height: 500px;
 }

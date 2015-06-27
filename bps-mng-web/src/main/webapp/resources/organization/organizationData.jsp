@@ -8,12 +8,12 @@
 <style type="text/css">
 .organizationData {
 	height: 470px;
-	width: 99%;
+	width: 100%;
 }
 .tabBox {
 	font-size: 15px;
 	color: rgb(62, 62, 62);
-	margin: 18px;
+	margin: 10px;
 }
 .tabHead {
 	float: left;
@@ -21,7 +21,6 @@
 	border: solid 1px rgb(198, 198, 198);
 	padding: 7px 11px;
 	background-color: rgb(248,248,248);
-	width: 96%;
 	margin-left: 10px;
 }
 .tabList {
@@ -46,26 +45,31 @@ tabList:nth-child(3) { border-radius: 0px 4px 4px 0px;}
 .active {
 	background-color: #1E61CC;
 }
+.tabLink {
+	font-weight: bold;
+	cursor: pointer;
+	color: white;
+}
 
 </style>
 </head>
 <body>
 	<fieldset class="organizationData">
 		<legend><b><font size="3">ORGANIZATIONS DETAILS</font></b></legend>
-		<br>
-		<section style="background-color: #FFF; height: 380px; width: 97%">
+		<section style="background-color: #FFF; height: 400px;">
+			<br>
 			<ul class="tabHead" data-ng-init="tab = 1">
 				<li class="tabList" data-ng-class="{active:tab===1}"> 
-					<a data-ng-click="tab = 1" style="font-weight: bold; cursor: pointer;">ORGANIZATION</a>	
+					<a data-ng-click="tab = 1" class="tabLink" >ORGANIZATION</a>	
 				</li>
 				<li class="tabList" data-ng-class="{active:tab===2}"> 
-					<a data-ng-click="tab = 2" style="font-weight: bold; cursor: pointer;">PROCESS</a> 
+					<a data-ng-click="tab = 2" class="tabLink" >PROCESS</a> 
 				</li>
 				<li class="tabList" data-ng-class="{active:tab===3}"> 
-					<a data-ng-click="tab = 3" style="font-weight: bold; cursor: pointer;">STATISTICS</a> 
+					<a data-ng-click="tab = 3" class="tabLink" >STATISTICS</a> 
 				</li>
 			</ul>
-			<br><br>
+			<br><br><br>
 			<div class="tabBox" data-ng-show="tab === 1">
 				<table style="padding: 10px; border-collapse: collapse; border-spacing: 5px;">
 					<tr>
