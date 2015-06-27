@@ -54,7 +54,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 		dbService.executeMultipleNamedQueries(setQueries);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void editOrganization(OrganizationBean orgBean) {
 		DBFacade<BpsOrganization, Long> dbService = DaoServiceFactory.generateService(ServiceType.Organization);
