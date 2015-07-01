@@ -7,7 +7,7 @@
 <title>Business Process System</title>
 </head>
 <body>
-	<table style="margin-left: 10px;">
+	<table style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
 				<input type="submit" class="btn btn-primary" name="Save" />

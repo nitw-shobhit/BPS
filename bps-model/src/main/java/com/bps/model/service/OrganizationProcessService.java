@@ -7,4 +7,5 @@ import com.bps.core.beans.ProcessBean;
 public interface OrganizationProcessService {
 	
 	List<ProcessBean> getOrganizationProcesses(Long orgId);
+	void addProcessToOrganization(Long orgId, List<Long> procIds);
 }

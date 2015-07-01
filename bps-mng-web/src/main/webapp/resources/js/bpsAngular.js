@@ -1,4 +1,4 @@
-var module = angular.module('bps-app', ['ui.router', 'ngDialog']);
+var module = angular.module('bps-app', ['ui.router', 'ngDialog', 'ngDragDrop']);
 
 // Routing
 module.config(function ($stateProvider, $urlRouterProvider, $provide) {
@@ -382,7 +382,17 @@ module.controller("organizationDataController", function ($rootScope, $scope, $s
 	            dataType: 'json',
 	            async: false,
 	            success: function(data) {
-	            	inputData.data = data;
+	            	inputData.data2 = data;
+	            }
+	        }).fail(function() {
+	    });
+		 $.ajax({
+			 	url: '/bps-mng-web/mngOrg/getOrganizationProcesses.do?orgId='+org.id,
+	            type: 'GET',
+	            dataType: 'json',
+	            async: false,
+	            success: function(data) {
+	            	inputData.data1 = data;
 	        		ngDialog.open({
 		    				template: 'attachProcPopup',
 		    				data: inputData,
@@ -396,9 +406,15 @@ module.controller("organizationDataController", function ($rootScope, $scope, $s
 	        }).fail(function() {
 	    });
 	}
+    $scope.dropSuccessHandler = function($event, index, array){
+        array.splice(index,1);
+    }
+    $scope.onDrop = function($event, $data, array){
+        array.push($data);
+    }
 	$scope.attachProcessesToOrganization = function() {
 		 $.ajax({
-	            url: '/bps-mng-web/mngOrg/editOrganization.do?org='+JSON.stringify($scope.ngDialogData),
+	            url: '/bps-mng-web/mngOrg/addProcessToOrganization.do?orgId='+$scope.org.id + 'procIds'+JSON.stringify($scope.ngDialogData),
 	            type: 'GET',
 	            dataType: 'json',
 	            async: false,

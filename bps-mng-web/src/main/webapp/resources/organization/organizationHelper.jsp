@@ -143,7 +143,7 @@
 
 <script type="text/ng-template" id="attachProcPopup">
 <br>
-<div class="{{ngDialogData.styleClass}}" style="height: 450px;">
+<div class="{{ngDialogData.styleClass}}" style="height: 530px;">
 	<form data-ng-submit="attachProcessesToOrganization()">
 		<div style="margin-left: 10px; font-size: 14px; font-weight: bold;">Time to add some processes to your {{ngDialogData.message}}..</div>
 		<br>
@@ -154,8 +154,20 @@
 						<legend>
 							<b><font size="3" style="margin-left:auto; margin-right:auto;">CURRENT</font></b>
 						</legend>
-						<div style="width: 250px; height: 300px; border: 1px solid #1E61CC;">
-					
+						<div style="width: 267px; height: 300px; border: 2px solid; overflow-y: scroll; overflow-x:hidden;" ui-on-Drop="onDrop($event, $data, ngDialogData.data1)">
+								<div ui-draggable="true" drag="proc" on-drop-success="dropSuccessHandler($event, $index, ngDialogData.data1)"
+										 data-ng-repeat="proc in ngDialogData.data1 track by $index">
+										<div class="btn btn-primary" style="width:246px;">
+											<div style="float: left; width: 155px; overflow: auto;">
+												<font size="2">
+													{{proc}}
+												</font>
+											</div>
+											<div style="float: left; width: 55px; margin-left:10px;">
+												<img src="" style="width: 55px; height: 55px;"/>											
+											</div>
+										</div>
+								</div>
 						</div>
 					</fieldset>
 				</td>
@@ -166,19 +178,21 @@
 						<legend>
 							<b><font size="3" style="margin-left:auto; margin-right:auto;">AVAILABLE</font></b>
 						</legend>
-						<div style="width: 250px; height: 300px; border: 1px solid #1E61CC;">
-							<table style="overflow: auto;">
-								<tr data-ng-repeat="proc in ngDialogData.data">
-									<td>
-										<div style="border: 2px solid gray; width:242px; margin-left: 3px; margin-top:2px; word-wrap:break-word;">
-											<b>{{proc.procId}}<b><br>
-											{{proc.procName}}<br>
-											{{proc.procCurrVer}} - {{proc.procNotn}}
+						<div style="width: 267px; height: 300px; border: 2px solid; overflow-y: scroll; overflow-x:hidden;" ui-on-Drop="onDrop($event, $data, ngDialogData.data2)">
+								<div ui-draggable="true" drag="proc" on-drop-success="dropSuccessHandler($event, $index, ngDialogData.data2)"
+										 data-ng-repeat="proc in ngDialogData.data2 track by $index">
+										<div class="btn btn-primary" style="width:246px;">
+											<div style="float: left; width: 155px; overflow: auto;">
+												<font size="2">
+													{{proc}}
+												</font>
+											</div>
+											<div style="float: left; width: 55px; margin-left:10px;">
+												<img src="" style="width: 55px; height: 55px;"/>											
+											</div>
 										</div>
-									</td>
-								</tr>
-							<table>
-						</div>						
+								</div>
+						</div>				
 					</fieldset>
 				</td>
 			</tr>

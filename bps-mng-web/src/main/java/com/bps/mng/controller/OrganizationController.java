@@ -1,6 +1,7 @@
 package com.bps.mng.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -34,6 +35,11 @@ public class OrganizationController {
 	
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationProcesses.do")
 	public @ResponseBody String getOrganizationProcesses(@RequestParam("orgId") Long orgId) {
+		return JsonUtils.toJson(orgProcService.getOrganizationProcesses(orgId));
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/addProcessToOrganization.do")
+	public @ResponseBody String addProcessToOrganization(@RequestParam("orgId") Long orgId, @RequestParam("processes") List<Long> procIds) {
 		return JsonUtils.toJson(orgProcService.getOrganizationProcesses(orgId));
 	}
 	
