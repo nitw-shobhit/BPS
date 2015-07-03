@@ -7,7 +7,6 @@
 		<class>com.bps.core.entities.BpsUserInfo</class>
 		<class>com.bps.core.entities.BpsProcess</class>
 		<class>com.bps.core.entities.BpsProcessVer</class>
-		<class>com.bps.core.entities.BpsAudit</class>
 		<class>com.bps.core.entities.BpsLog</class>
 		<class>com.bps.core.entities.BpsOrganization</class>
 		<class>com.bps.core.entities.BpsOrgProc</class>

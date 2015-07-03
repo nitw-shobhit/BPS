@@ -1,15 +1,44 @@
-var module = angular.module('bps-app', ['ui.router', 'ngDialog', 'ngDragDrop']);
+var module = angular.module('bps-app', ['ui.router', 'ngDialog', 'ngDragDrop', 'pascalprecht.translate']);
+
+//i18n & l10n
+module.config(function ($translateProvider) {
+	
+	$translateProvider.translations('en', {
+		"page" : {
+			"header" : {
+				"home" : "HOME"
+			}
+		}
+	});
+	$translateProvider.translations('es', {
+		"page" : {
+			"header" : {
+				"home" : "CASA"
+			}
+		}
+	});
+	$translateProvider.translations('it', {
+		"page" : {
+			"header" : {
+				"home" : "CASA"
+			}
+		}
+	});
+	$translateProvider.translations('fr', {
+		"page" : {
+			"header" : {
+				"home" : "ACCUEIL"
+			}
+		}
+	});
+	
+	$translateProvider.preferredLanguage('en');
+});
+
 
 // Routing
 module.config(function ($stateProvider, $urlRouterProvider, $provide) {
-//	
-//	$provide.decorator('$state', function($delegate) {
-//	    $delegate.reinit = function() {
-//	      this.transitionTo(this.current, this.$current.params, { reload: true, inherit: true, notify: true });
-//	    };
-//	    return $delegate;
-//	  });
-//	
+	
 	$stateProvider.state('app',
 							{
 								url: "/",
@@ -206,7 +235,11 @@ module.controller("userInfoController", function ($scope, transferService) {
 	$scope.profileData = transferService.get();
 });
 
-module.controller("menuController", function ($scope, $state, transferService) {
+module.controller("menuController", function ($scope, $state, transferService, $translate) {
+	$scope.locale = "en";
+	$scope.setLocale = function () {
+		$translate.use($scope.locale);
+	};
 	$scope.home = function() {
         $state.transitionTo('app.dboard.home');
 	}

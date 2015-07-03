@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bps.core.beans.ProcessBean;
 import com.bps.model.service.ProcessService;
 import com.bps.model.service.ProcessVersionService;
+import com.bps.util.audit.Audit;
 import com.google.gson.Gson;
 
 @Controller
@@ -25,16 +26,19 @@ public class ProcessController {
 	@Resource
 	private ProcessVersionService procVerService;
 	
+	@Audit(event = "Process", value = "Getting Processes")
 	@RequestMapping(method = RequestMethod.GET, value="/getProcessData.do")
 	public @ResponseBody String getProcessData() {
 		return new Gson().toJson(procService.getProcesses());
 	}
 	
+	@Audit(event = "Process", value = "Getting Process Versions")
 	@RequestMapping(method = RequestMethod.GET, value="/getProcessVersions.do")
 	public @ResponseBody String getProcessVersions(@RequestParam("procId") Long procId) {
 		return new Gson().toJson(procVerService.getProcessVersionsByProcessId(procId));
 	}
 	
+	@Audit(event = "Process", value = "Deleting Process")
 	@RequestMapping(method = RequestMethod.GET, value="/deleteProcess.do")
 	public ModelAndView deleteProcess(@RequestParam("idProcess") Long idProcess) {
 		procService.deleteProcess(idProcess);
@@ -43,6 +47,7 @@ public class ProcessController {
 //		return targetView;
 	}
 	
+	@Audit(event = "Process", value = "Adding Process")
 	@RequestMapping(method = RequestMethod.POST, value="/addProcess.do")
 	public ModelAndView addProcess(@ModelAttribute("bps-mng-web")ProcessBean procBean) {
 		procService.addProcess(procBean);

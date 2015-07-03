@@ -38,18 +38,33 @@
 	</script>
 </head>
 <body>
-	<div style="border-bottom: 2px solid white; border-top: 2px solid white;">
-		<table>
-			<tr>
-				<td class="menuBg" style="border-left: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="home()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_home.ico" title="HOME" height="24" width="24" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="orgs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_org.ico" title="ORGANIZATION" height="36" width="36" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="procs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_process.ico" title="PROCESS" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="logs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_log.ico" title="LOG" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="stngs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_setting.ico" title="SETTINGS" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="lgot()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_logout.ico" title="LOGOUT" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
-				<td class="menuBg" style="border-right: 1px solid;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="help()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_help.ico" title="HELP" height="26" width="26" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			</tr>
-		</table>
+	<div style="border-bottom: 2px solid white; border-top: 2px solid white; height: 40px; ">
+		<div style="float: left;">
+			<table>
+				<tr>
+					<td class="menuBg" style="border-left: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="home()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_home.ico" title="HOME" height="24" width="24" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="orgs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_org.ico" title="ORGANIZATION" height="36" width="36" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="procs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_process.ico" title="PROCESS" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="logs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_log.ico" title="LOG" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="stngs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_setting.ico" title="SETTINGS" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="lgot()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_logout.ico" title="LOGOUT" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td class="menuBg" style="border-right: 1px solid;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="help()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_help.ico" title="HELP" height="26" width="26" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		<div style="float: right;">
+			<select data-ng-change="setLocale()" data-ng-model="locale" style="margin-top: 8px; margin-right: 8px; width: 32px;">
+			    <option value="en" data-ng-selected="locale == 'en'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/usa.ico'); height: 32px; width: 32px;">
+			    </option>
+			    <option value="es" data-ng-selected="locale == 'es'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/spain.ico'); height: 32px; width: 32px;">
+			    </option>
+			    <option value="it" data-ng-selected="locale == 'it'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/italy.ico'); height: 32px; width: 32px;">
+			    </option>
+			    <option value="fr" data-ng-selected="locale == 'fr'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/france.ico'); height: 32px; width: 32px;">
+			    </option>
+			</select>
+		</div>
+		<!-- http://www.marghoobsuleman.com/jquery-image-dropdown -->
 	</div>
 </body>
 </html>

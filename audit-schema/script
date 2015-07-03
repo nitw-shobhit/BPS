@@ -1,0 +1,1 @@
+curl -XPUT http://localhost:9200/record --upload-file mapping.json   #Example : curl -XPUT http://localhost:9200/bps --upload-file C:/Users/shobhit.tyagi/git/BPS/audit-schemamapping.json

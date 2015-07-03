@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bps.core.beans.UserBean;
 import com.bps.model.service.UserService;
+import com.bps.util.audit.Audit;
 import com.google.gson.Gson;
 
 @Controller
@@ -21,6 +22,7 @@ public class LoginController {
 	@Resource
 	private UserService userService;
 	
+	@Audit(event = "Login", value = "Validating Login Details")
 	@RequestMapping(method = RequestMethod.POST, value="/validateLogin.do")
 	public @ResponseBody String validateLogin(@RequestParam("userId")String userId, @RequestParam("password")String password) throws AccessDeniedException {
 		UserBean inputBean = new UserBean();

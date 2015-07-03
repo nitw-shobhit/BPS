@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="contentBox">
-		<b><font size="4">HOME</font></b>
+		<b><font size="4">{{ 'page.header.home' | translate }}</font></b>
 	</div>
 </body>
 </html>

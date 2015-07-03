@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bps.core.beans.OrganizationBean;
 import com.bps.model.service.OrganizationProcessService;
 import com.bps.model.service.OrganizationService;
+import com.bps.util.audit.Audit;
 import com.bps.util.spring.JsonUtils;
 
 @Controller
@@ -28,21 +29,25 @@ public class OrganizationController {
 	@Resource
 	private OrganizationProcessService orgProcService;
 
+	@Audit(event = "Organization", value = "Getting Organization Data")
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationData.do")
 	public @ResponseBody String getOrganizationData() {
 		return JsonUtils.toJson(orgService.getOrganizations());
 	}
 	
+	@Audit(event = "Organization", value = "Getting Organization Processes")
 	@RequestMapping(method = RequestMethod.GET, value="/getOrganizationProcesses.do")
 	public @ResponseBody String getOrganizationProcesses(@RequestParam("orgId") Long orgId) {
 		return JsonUtils.toJson(orgProcService.getOrganizationProcesses(orgId));
 	}
 	
+	@Audit(event = "Organization", value = "Adding Process to Organization")
 	@RequestMapping(method = RequestMethod.GET, value="/addProcessToOrganization.do")
 	public @ResponseBody String addProcessToOrganization(@RequestParam("orgId") Long orgId, @RequestParam("processes") List<Long> procIds) {
 		return JsonUtils.toJson(orgProcService.getOrganizationProcesses(orgId));
 	}
 	
+	@Audit(event = "Organization", value = "Adding Organization")
 	@RequestMapping(method = RequestMethod.GET, value="/addOrganization.do")
 	public @ResponseBody String addOrganization(@RequestParam("org")String orgJson) throws JsonParseException, JsonMappingException, IOException {
 		OrganizationBean orgBean = (OrganizationBean) JsonUtils.toPojo(orgJson, OrganizationBean.class);
@@ -50,6 +55,7 @@ public class OrganizationController {
 		return getOrganizationData();
 	}
 	
+	@Audit(event = "Organization", value = "Editing Organization")
 	@RequestMapping(method = RequestMethod.GET, value="/editOrganization.do")
 	public @ResponseBody String editOrganization(@RequestParam("org")String orgJson) throws JsonParseException, JsonMappingException, IOException {
 		OrganizationBean orgBean = (OrganizationBean) JsonUtils.toPojo(orgJson, OrganizationBean.class);
@@ -57,6 +63,7 @@ public class OrganizationController {
 		return getOrganizationData();
 	}
 	
+	@Audit(event = "Organization", value = "Deleting Organization")
 	@RequestMapping(method = RequestMethod.GET, value="/deleteOrganization.do")
 	public @ResponseBody String deleteOrganization(@RequestParam("orgId") Long orgId) {
 		orgService.deleteOrganization(orgId);

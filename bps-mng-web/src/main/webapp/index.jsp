@@ -12,6 +12,7 @@
 <script src="<%= request.getContextPath()%>/resources/js/angular-route.min.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/angular-ui-router.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/draganddrop.js"></script>
+<script src="<%= request.getContextPath()%>/resources/js/angular-translate.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bpsAngular.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/ngDialog.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
