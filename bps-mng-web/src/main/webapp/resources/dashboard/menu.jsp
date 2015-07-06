@@ -53,18 +53,8 @@
 			</table>
 		</div>
 		<div style="float: right;">
-			<select data-ng-change="setLocale()" data-ng-model="locale" style="margin-top: 8px; margin-right: 8px; width: 32px;">
-			    <option value="en" data-ng-selected="locale == 'en'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/usa.ico'); height: 32px; width: 32px;">
-			    </option>
-			    <option value="es" data-ng-selected="locale == 'es'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/spain.ico'); height: 32px; width: 32px;">
-			    </option>
-			    <option value="it" data-ng-selected="locale == 'it'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/italy.ico'); height: 32px; width: 32px;">
-			    </option>
-			    <option value="fr" data-ng-selected="locale == 'fr'" style="background-image: url('<%= request.getContextPath()%>/resources/images/flag/france.ico'); height: 32px; width: 32px;">
-			    </option>
-			</select>
+			<%@include file="../components/select-country/select_country.jsp" %>
 		</div>
-		<!-- http://www.marghoobsuleman.com/jquery-image-dropdown -->
 	</div>
 </body>
 </html>

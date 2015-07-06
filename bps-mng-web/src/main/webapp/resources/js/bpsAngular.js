@@ -236,6 +236,7 @@ module.controller("userInfoController", function ($scope, transferService) {
 });
 
 module.controller("menuController", function ($scope, $state, transferService, $translate) {
+	alert($scope.locale);
 	$scope.locale = "en";
 	$scope.setLocale = function () {
 		$translate.use($scope.locale);
