@@ -25,6 +25,9 @@
 		}
 	</style>
 	<script type="text/javascript">
+		$(document).ready(function(e) {
+			$('#firstLink').addClass('menuSelect');
+		});
 		$(function() {
 		$('td').click(
 			function() {
@@ -42,7 +45,7 @@
 		<div style="float: left;">
 			<table>
 				<tr>
-					<td class="menuBg" style="border-left: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="home()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_home.ico" title="HOME" height="24" width="24" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+					<td id="firstLink" class="menuBg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="home()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_home.ico" title="HOME" height="24" width="24" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="orgs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_org.ico" title="ORGANIZATION" height="36" width="36" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="procs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_process.ico" title="PROCESS" height="26" width="26" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 					<td class="menuBg" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a data-ng-click="logs()" class="menuLink"><img src="<%= request.getContextPath()%>/resources/images/menu/m_log.ico" title="LOG" height="28" width="28" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
@@ -53,7 +56,12 @@
 			</table>
 		</div>
 		<div style="float: right;">
-			<%@include file="../components/select-country/select_country.jsp" %>
+			<select data-ng-change="setLocale()" data-ng-model="locale" style="width: 105px; margin-right:10px; margin-top:2px; text-align: left;">
+				<option value='en' data-ng-selected="locale == 'en'">English</option>
+				<option value='es' data-ng-selected="locale == 'es'">Spanish</option>
+				<option value='fr' data-ng-selected="locale == 'fr'">French</option>
+				<option value='ar' data-ng-selected="locale == 'ar'">Arabic</option>
+		    </select>
 		</div>
 	</div>
 </body>

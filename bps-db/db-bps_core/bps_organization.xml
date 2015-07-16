@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="CREATE-BPS_ORGANIZATION-TABLE" author="Shobhit Tyagi">
+		<preConditions onFail="MARK_RAN">
+			<!-- Only perform the initial database create if key table doesn't exist -->
+			<not>
+				<tableExists tableName="bps_organization" />
+			</not>
+		</preConditions>
+
+		<!-- bps_organization -->
+		<createTable tableName="bps_organization">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="bps_organization_pkey" />
+			</column>
+			<column name="org_id" type="VARCHAR(50)" >
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="org_name" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="org_desc" type="VARCHAR(1000)">
+				<constraints nullable="true" />
+			</column>
+			<column name="org_type" type="VARCHAR(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="org_addr" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="org_cr_dt" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addAutoIncrement columnDataType="BIGINT" columnName="id" incrementBy="1" startWith="100" tableName="bps_organization"/>
+		
+	</changeSet>
+</databaseChangeLog>

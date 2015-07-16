@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process System</title>
-<script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
 <style type="text/css">
 .contentBox {
 	margin-left: 7px;

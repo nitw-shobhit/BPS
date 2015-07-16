@@ -36,10 +36,26 @@ module.config(function ($translateProvider) {
 });
 
 
+// Custom Directives
+
+module.directive('ngReallyClick', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                var message = attrs.ngReallyMessage;
+                if (message && confirm(message)) {
+                    scope.$apply(attrs.ngReallyClick);
+                }
+            });
+        }
+    }
+}]);
+
 // Routing
 module.config(function ($stateProvider, $urlRouterProvider, $provide) {
 	
-	$stateProvider.state('app',
+				$stateProvider.state('app',
 							{
 								url: "/",
 								views: {
@@ -97,8 +113,8 @@ module.config(function ($stateProvider, $urlRouterProvider, $provide) {
 								url: "",
 								views: {
 									 'orgs' : {
-											templateUrl : 'resources/organization/organizationList.jsp',
-											controller : 'organizationDataController'
+										templateUrl : 'resources/organization/organizationList.jsp',
+										controller : 'organizationDataController'
 									}
 								}
 							}
@@ -108,8 +124,8 @@ module.config(function ($stateProvider, $urlRouterProvider, $provide) {
 								url: "",
 								views: {
 									 'orgData' : {
-											templateUrl : 'resources/organization/organizationData.jsp',
-											controller : 'organizationDataController'
+										templateUrl : 'resources/organization/organizationData.jsp',
+										controller : 'organizationDataController'
 									}
 								}
 							}
@@ -130,8 +146,8 @@ module.config(function ($stateProvider, $urlRouterProvider, $provide) {
 								url: "",
 								views: {
 									 'procs' : {
-											templateUrl : 'resources/process/processList.jsp',
-											controller : 'processDataController'
+										templateUrl : 'resources/process/processList.jsp',
+										controller : 'processDataController'
 									}
 								}
 							}
@@ -141,8 +157,8 @@ module.config(function ($stateProvider, $urlRouterProvider, $provide) {
 								url: "",
 								views: {
 									 'procData' : {
-											templateUrl : 'resources/process/processVersions.jsp',
-											controller : 'processDataController'
+										templateUrl : 'resources/process/processVersions.jsp',
+										controller : 'processDataController'
 									}
 								}
 							}
@@ -222,7 +238,7 @@ module.controller("loginController", function ($scope, $state, transferService) 
             async: false,
             success: function(data) {
             	transferService.set(data);
-                $state.transitionTo('app.dboard');
+                $state.go('app.dboard');
                 $scope.loading = false;
             }
         }).fail(function() {
@@ -236,13 +252,12 @@ module.controller("userInfoController", function ($scope, transferService) {
 });
 
 module.controller("menuController", function ($scope, $state, transferService, $translate) {
-	alert($scope.locale);
 	$scope.locale = "en";
 	$scope.setLocale = function () {
 		$translate.use($scope.locale);
 	};
 	$scope.home = function() {
-        $state.transitionTo('app.dboard.home');
+        $state.go('app.dboard.home');
 	}
 	$scope.orgs = function() {
 		 $.ajax({
@@ -252,7 +267,7 @@ module.controller("menuController", function ($scope, $state, transferService, $
 	            async: false,
 	            success: function(data) {
 	            	transferService.set(data);
-	            	$state.transitionTo('app.dboard.org.orgs');
+	            	$state.go('app.dboard.org');
 	            }
 	        }).fail(function() {
 	    });
@@ -265,28 +280,28 @@ module.controller("menuController", function ($scope, $state, transferService, $
 	            async: false,
 	            success: function(data) {
 	            	transferService.set(data);
-	            	$state.transitionTo('app.dboard.proc.procs');
+	            	$state.go('app.dboard.proc');
 	            }
 	        }).fail(function() {
 	    });
 	}
 	$scope.logs = function() {
-        $state.transitionTo('app.dboard.log');
+        $state.go('app.dboard.log');
 	}
 	$scope.stngs = function() {
-        $state.transitionTo('app.dboard.sts');
+        $state.go('app.dboard.sts');
 	}
 	$scope.help = function() {
-        $state.transitionTo('app.dboard.help');
+        $state.go('app.dboard.help');
 	}
 	$scope.lgot = function() {
-        $state.transitionTo('app');
+        $state.go('app');
 	}
 });
 
 module.controller("processController", function ($scope, $state, transferService) {
 	$scope.processList = transferService.get();
-	$state.transitionTo('app.dboard.proc.procs');
+	$state.go('app.dboard.proc.procs');
 });
 
 module.controller("processDataController", function ($scope, $state) {
@@ -298,7 +313,7 @@ module.controller("processDataController", function ($scope, $state) {
 	            async: false,
 	            success: function(data) {
 	            	$scope.procVersions = data;
-	            	$state.transitionTo('app.dboard.proc.procs.procdata');
+	            	$state.go('app.dboard.proc.procs.procdata');
 	            }
 	        }).fail(function() {
 	    });
@@ -307,7 +322,7 @@ module.controller("processDataController", function ($scope, $state) {
 
 module.controller("organizationController", function ($scope, $state, transferService) {
 	$scope.organizationList = transferService.get();
-	$state.transitionTo('app.dboard.org.orgs');
+	$state.go('app.dboard.org.orgs');
 });
 
 module.controller("organizationDataController", function ($rootScope, $scope, $state, ngDialog, transferService) {
@@ -330,7 +345,7 @@ module.controller("organizationDataController", function ($rootScope, $scope, $s
 	            success: function(data) {
 	            	$scope.selectedOrg = org;
 	            	$scope.orgProcs = data;
-	            	$state.transitionTo('app.dboard.org.orgs.orgdata');
+	            	$state.go('app.dboard.org.orgs.orgdata');
 	            }
 	        }).fail(function() {
 	    });

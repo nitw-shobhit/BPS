@@ -1,0 +1,44 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="CREATE-BPS_PROCESS_VER-TABLE" author="Shobhit Tyagi">
+		<preConditions onFail="MARK_RAN">
+			<!-- Only perform the initial database create if key table doesn't exist -->
+			<not>
+				<tableExists tableName="bps_process_ver" />
+			</not>
+		</preConditions>
+
+		<!-- bps_process_ver -->
+		<createTable tableName="bps_process_ver">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="bps_process_ver_pkey" />
+			</column>
+			<column name="prov_id" type="BIGINT" >
+				<constraints nullable="false" />
+			</column>
+			<column name="prov_ver" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="prov_notn" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="prov_comment" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="prov_modf_by" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="prov_modf_dt" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addAutoIncrement columnDataType="BIGINT" columnName="id" incrementBy="1" startWith="100" tableName="bps_process_ver"/>
+		
+		<addForeignKeyConstraint constraintName="bps_process_ver_prov_id_fk" baseTableName="bps_process_ver" baseColumnNames="prov_id" referencedTableName="bps_process" referencedColumnNames="id" />
+	
+	</changeSet>
+</databaseChangeLog>

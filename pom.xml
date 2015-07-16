@@ -8,6 +8,7 @@
 	<name>bps-parent</name>
 	<description>Parent Project</description>
 	<modules>
+		<module>bps-db</module>
 		<module>bps-core</module>
 		<module>bps-util</module>
 		<module>bps-dao</module>

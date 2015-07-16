@@ -23,7 +23,15 @@ public class DBFacadeImpl<T, PK> implements DBFacade<T, PK> {
 
 	@Override
 	public void merge(T obj) {
-		getEntityManager().merge(obj);
+		EntityTransaction etx = getEntityManager().getTransaction();
+		try {
+			etx.begin();
+			getEntityManager().merge(obj);
+			etx.commit();
+		} catch(Exception e) {
+			etx.rollback();
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -118,33 +118,46 @@
 <script type="text/ng-template" id="addOrgPopup">
 <br>
 <div style="height: 320px;" class="{{ngDialogData.styleClass}}">
-	<form data-ng-submit="addOrganization()">
 		<div style="margin-left: 10px; font-size: 14px; font-weight: bold;">Please tell us a little about your {{ngDialogData.message}}..</div>
 		<br>
 		<%@include file="organizationForm.jsp" %>
 		<br>
-		<%@include file="../reusable/popupButtonSet.jsp" %>
-	</form>
+		<table style="margin-left: auto; margin-right: auto;">
+			<tr>
+				<td>
+					<button class="btn btn-primary" ng-really-message="Are you sure you want to continue?" data-ng-really-click="addOrganization()">Save</button>
+				</td>
+				<td>
+					<button data-ng-click="closeThisDialog('button')" class="btn btn-secondary" style="margin-left: 20px;" >Cancel</button>
+				</td>
+			</tr>
+		</table>
 </div>
 </script>
 
 <script type="text/ng-template" id="editOrgPopup">
 <br>
 <div class="{{ngDialogData.styleClass}}" style="height: 320px;">
-	<form data-ng-submit="editOrganization()">
 		<div style="margin-left: 10px; font-size: 14px; font-weight: bold;">Let us edit some information about your {{ngDialogData.message}}..</div>
 		<br>
 		<%@include file="organizationEditForm.jsp" %>
 		<br>
-		<%@include file="../reusable/popupButtonSet.jsp" %>
-	</form>
+		<table style="margin-left: auto; margin-right: auto;">
+			<tr>
+				<td>
+					<button class="btn btn-primary" ng-really-message="Are you sure you want to continue?" data-ng-really-click="editOrganization()">Save</button>
+				</td>
+				<td>
+					<button data-ng-click="closeThisDialog('button')" class="btn btn-secondary" style="margin-left: 20px;" >Cancel</button>
+				</td>
+			</tr>
+		</table>
 </div>
 </script>
 
 <script type="text/ng-template" id="attachProcPopup">
 <br>
 <div class="{{ngDialogData.styleClass}}" style="height: 530px;">
-	<form data-ng-submit="attachProcessesToOrganization()">
 		<div style="margin-left: 10px; font-size: 14px; font-weight: bold;">Time to add some processes to your {{ngDialogData.message}}..</div>
 		<br>
 		<table style="margin-left: auto; margin-right: auto;">
@@ -198,8 +211,16 @@
 			</tr>
 		</table>		
 		<br><br>
-		<%@include file="../reusable/popupButtonSet.jsp" %>
-	</form>
+		<table style="margin-left: auto; margin-right: auto;">
+			<tr>
+				<td>
+					<button class="btn btn-primary" ng-really-message="Are you sure you want to continue?" data-ng-really-click="attachProcessesToOrganization()">Save</button>
+				</td>
+				<td>
+					<button data-ng-click="closeThisDialog('button')" class="btn btn-secondary" style="margin-left: 20px;" >Cancel</button>
+				</td>
+			</tr>
+		</table>
 </div>
 </script>
 </head>

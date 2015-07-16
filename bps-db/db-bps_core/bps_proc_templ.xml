@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="CREATE-BPS_PROC_TEMPL-TABLE" author="Shobhit Tyagi">
+		<preConditions onFail="MARK_RAN">
+			<!-- Only perform the initial database create if key table doesn't exist -->
+			<not>
+				<tableExists tableName="bps_proc_templ" />
+			</not>
+		</preConditions>
+
+		<!-- bps_org_proc -->
+		<createTable tableName="bps_proc_templ">
+			<column name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="bps_proc_templ_pkey" />
+			</column>
+			<column name="TEM_ID" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="TEM_NAME" type="VARCHAR(50)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="TEM_NOTN" type="VARCHAR(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="TEM_DESC" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		
+		<addAutoIncrement columnDataType="BIGINT" columnName="id" incrementBy="1" startWith="100" tableName="bps_proc_templ"/>
+
+	</changeSet>
+</databaseChangeLog>

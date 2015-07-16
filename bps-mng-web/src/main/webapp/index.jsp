@@ -15,7 +15,6 @@
 <script src="<%= request.getContextPath()%>/resources/js/angular-translate.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/bpsAngular.js"></script>
 <script src="<%= request.getContextPath()%>/resources/js/ngDialog.js"></script>
-<script src="<%= request.getContextPath()%>/resources/js/bps.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Business Process Management</title>
 <link rel="icon" type="image/x-icon" href="<%= request.getContextPath()%>/resources/images/favicon.ico" />
@@ -35,7 +34,6 @@
 </style>
 </head>
 <body>
-	<loading></loading>
 	<div class="main" style="">
 		<div id = "header" style="height: 130px; width: 1200px;">
 			<div data-ui-view="logo" style="height: 130px; width: 870px; float: left;">
